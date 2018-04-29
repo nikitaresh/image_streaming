@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Viewer</class>
+ <widget class="QWidget" name="Viewer">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>216</width>
+    <height>384</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Viewer</string>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
+  </property>
+  <widget class="QLabel" name="liveImageStream">
+   <property name="geometry">
+    <rect>
+     <x>8</x>
+     <y>10</y>
+     <width>200</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="connectionButton">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>180</y>
+     <width>70</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Connect</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="exitButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>350</y>
+     <width>81</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="camerasComboBox">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>190</y>
+     <width>121</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="cameraGroupBox">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>230</y>
+     <width>185</width>
+     <height>115</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QPushButton" name="startStreamingButton">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>70</y>
+      <width>91</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Start Stream</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="runCameraButton">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>20</y>
+      <width>91</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Run Camera</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="cameraFpsStringLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>61</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>10</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="cursorMoveStyle">
+     <enum>Qt::VisualMoveStyle</enum>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="streamFpsStringLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>61</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>10</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

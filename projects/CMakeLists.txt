@@ -1,0 +1,1 @@
+add_subdirectory( pi_camera_client )
