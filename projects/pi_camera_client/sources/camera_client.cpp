@@ -47,19 +47,14 @@ CameraClient::~CameraClient()
     logFile.close();
 }
 
-bool CameraClient::connectToServer( const QString& hostName_, quint16 port_, int waitConnectionMsecs_ )
+void CameraClient::connectToServer( const QString& hostName_, quint16 port_, int waitConnectionMsecs_ )
 {
     hostName = hostName_;
     port = port_;
     waitConnectionMsecs = waitConnectionMsecs_;
-    bool isConnected = slotConnectToServer();
-    if( !isConnected ) {
-        addMessageToLog( "ERROR: connectToServer(...) failed: slotConnectToServer() return false" );
-        return false;
-    }
+    connectionTimer.start(waitConnectionMsecs);
 
-    addMessageToLog("connectToServer(): connected");
-    return true;
+    addMessageToLog("connectToServer(): connectionTimer.start(...)");
 }
 
 void CameraClient::closeConnection()
@@ -111,6 +106,7 @@ void CameraClient::slotReadyRead()
 
 void CameraClient::slotDisconnected()
 {
+    addMessageToLog("slotDisconnected()");
     connectionTimer.start(waitConnectionMsecs);
 }
 
@@ -166,6 +162,9 @@ bool CameraClient::slotConnectToServer()
 
     tcpSocket.connectToHost( hostName, port );
     bool isConnected = tcpSocket.waitForConnected( waitConnectionMsecs );
+    if( isConnected ) {
+        addMessageToLog("slotConnectToServer(): connected");
+    }
     return isConnected;
 }
 

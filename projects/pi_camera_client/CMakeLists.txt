@@ -1,6 +1,6 @@
 
 cmake_minimum_required( VERSION 3.0 )
-project( pi_cam_client )
+project( pi_camera_client )
 
 set( CMAKE_INCLUDE_CURRENT_DIR ON )
 set( CMAKE_AUTOMOC ON )
@@ -35,5 +35,5 @@ if(UNIX)
     set( pi_cam_client_targets ${pi_cam_client_targets} raspicam -lpthread )
 endif(UNIX)
 
-add_executable( pi_cam_client ${HEADER} ${SOURCES} )
-target_link_libraries( pi_cam_client ${pi_cam_client_targets} )
+add_executable( pi_camera_client ${HEADER} ${SOURCES} )
+target_link_libraries( pi_camera_client ${pi_cam_client_targets} )

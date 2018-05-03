@@ -28,7 +28,7 @@ public:
      * @param port - a server port
      * @param waitConnectionMsecs - connection timeout in millisecond
      */
-    bool connectToServer( const QString& hostName, quint16 port, int waitConnectionMsecs );
+    void connectToServer( const QString& hostName, quint16 port, int waitConnectionMsecs );
 
     /**
      * @brief Closes connection with the server

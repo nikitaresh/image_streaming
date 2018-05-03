@@ -34,7 +34,7 @@ bool ViewerClient::slotConnectToServer( const QString& ip, quint16 port )
         slotDisconnect();
     }
 
-    int waitConnectionMsecs = 300;
+    int waitConnectionMsecs = 1000;
     tcpSocket.connectToHost( ip, port );
     bool isConnected = tcpSocket.waitForConnected( waitConnectionMsecs );
     if( !isConnected ) {
