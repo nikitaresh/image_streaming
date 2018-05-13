@@ -1,7 +1,7 @@
 # Image Streaming
 Streaming images from Raspberry Pi Camera to Qt Viewer
 
-This repository represents streaming images from Raspberry Pi to remoute application through the server. The System consist of three projects:
+This repository represents streaming images from Raspberry Pi to remoute application through the server. The System consists of three projects:
 
 [Server](#server)
 
@@ -11,12 +11,12 @@ This repository represents streaming images from Raspberry Pi to remoute applica
 
 
 ## Server
-Server application locates in [image_streaming/projects/server/](projects/server/) directory. This console application provides connection of camera and viewer clients, transfer of control commands and transferring images from a camera to clients. 
+Server application is located in [image_streaming/projects/server/](projects/server/) directory. This console application provides connection of camera and viewer clients, transfer of control commands and transferring images from a camera to clients. 
 Server project was written in C++ and depends only on Qt5 library, so you can build this application on different Operating Systems, which support Qt5 library.
 Before running the server, make sure that the server port (default value 555) is opened: an exception has been added to the firewall (on Windows OS) and the server port is accessible from Viewer and Raspberry Pi networks.
 
 ## Raspberry Pi application
-The pi_camera_client application locates in [image_streaming/projects/pi_camera_client/](projects/pi_camera_client/) directory. This console application provides image transfer from the Raspberry Pi Camera to the Server.
+The pi_camera_client application is located in [image_streaming/projects/pi_camera_client/](projects/pi_camera_client/) directory. This console application provides image transfer from the Raspberry Pi Camera to the Server.
 The pi_camera_client was written in C++ and depends on Qt5, OpenCV and raspicam libraries. The raspicam library version 0.1.6 already located in [image_streaming/thirdparty/raspicam-0.1.6/](thirdparty/raspicam-0.1.6/) directory.
 
 **Build steps for Raspberry Pi with Ubuntu MATE OS**:
@@ -49,6 +49,6 @@ The pi_camera_client was written in C++ and depends on Qt5, OpenCV and raspicam 
        sudo update-rc.d pi_camera_client defaults
 
 ## Viewer
-The Viewer application locates in [image_streaming/projects/viewer/](projects/viewer/) directory. This GUI application provides displaying images from a Raspberry Pi Camera.
+The Viewer application is located in [image_streaming/projects/viewer/](projects/viewer/) directory. This GUI application provides displaying images from a Raspberry Pi Camera.
 The Viewer application was written in C++ and depends on Qt5 library, includin Widgets module.
 This application was tested and can be used in Windows and Android OS.
