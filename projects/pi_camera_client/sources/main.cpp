@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     QCoreApplication app(argc, argv);
     CameraClient cameraClient;
 
-    const QString ip = "192.168.3.30";
+    const QString ip = "192.168.1.109";
     const int port = 555;
     const int waitConnectionMsecs = 1000;
     cameraClient.connectToServer( ip, port, waitConnectionMsecs );

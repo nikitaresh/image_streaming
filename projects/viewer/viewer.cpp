@@ -167,7 +167,7 @@ void Viewer::on_connectionButton_clicked()
     }
     else
     {
-        QString ip = "192.168.3.30";    // Change the value to your server IP address
+        QString ip = "192.168.1.109";    // Change the value to your server IP address
         quint16 port = 555;             // Check a server port
         emit signalConnectToServer(ip, port);
     }

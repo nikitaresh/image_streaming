@@ -1,6 +1,7 @@
 #ifndef CAMERA_CLIENT_H
 #define CAMERA_CLIENT_H
 
+#include <string>
 #include <QObject>
 #include <QString>
 #include <QTcpSocket>
@@ -92,6 +93,8 @@ private:
 
     PiCamera* piCamera;             // Raspberry Pi camera
     QThread piCameraThread;         // a thread of piCamera execution
+
+    std::string compressBuff;       // Buffer for output of image compressing
 
     QFile logFile;                  // log file
 };

@@ -49,6 +49,16 @@ cv::Mat3b PiCamera::getImage()
     return image;
 }
 
+unsigned int PiCamera::getImageWidth() const
+{
+    return imageWidth;
+}
+
+unsigned int PiCamera::getImageHeight() const
+{
+    return imageHeight;
+}
+
 void PiCamera::slotStartCamera( double fps )
 {
     if( fps == 0 ) {

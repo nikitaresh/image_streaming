@@ -7,6 +7,7 @@
 #include <QString>
 #include <QVector>
 #include <common.h>
+#include <string>
 
 /**
 \brief  Interaction object with the server via TCP
@@ -110,6 +111,9 @@ private:
                                 // first 64 bits of each message
 
     QVector<quint32> cameras;   // array of available cameras are requested after authorisation
+
+    std::string compressBuff;       // buffer of compressed image data recieved from Pi
+    std::string uncompressedBuff;   // buffer of uncompressed image data
 };
 
 #endif // VIEWER_CLIENT_H

@@ -26,6 +26,12 @@ public:
      */
     cv::Mat3b getImage();
 
+    /**
+    * @brief Returns an image width and height
+    */
+    unsigned int getImageWidth() const;
+    unsigned int getImageHeight() const;
+
 public slots:
     /**
      * @brief Slot for starting Raspberry Pi camera

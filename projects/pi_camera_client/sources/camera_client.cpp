@@ -2,6 +2,7 @@
 #include <camera_client.h>
 #include <QDataStream>
 #include <QDateTime>
+#include <snappy.h>
 
 CameraClient::CameraClient( QObject* parent )
     : QObject(parent), tcpSocket(this), connectionTimer(this), 
@@ -17,6 +18,10 @@ CameraClient::CameraClient( QObject* parent )
         return;
     }
     piCamera->moveToThread(&piCameraThread);
+
+    size_t imageBuffSize = 3 * piCamera->getImageWidth() * piCamera->getImageHeight();
+    size_t maxCompressedSize = snappy::MaxCompressedLength(imageBuffSize);
+    compressBuff.resize(maxCompressedSize);
 
     bool isAllBind = true;
     isAllBind = isAllBind && connect( &tcpSocket, &QTcpSocket::connected,
@@ -131,15 +136,22 @@ void CameraClient::slotSendImage()
         return;
     }
 
+    size_t imgDataSize = 3 * image.rows * image.cols;
+    size_t compressedSize = snappy::Compress( (char*)image.data, imgDataSize, &compressBuff );
+    if( compressedSize == 0 ) {
+        addMessageToLog("ERROR: slotSendImage() error: compressedSize == 0");
+        return;
+    }
+
     qint32 imgType = image.type();
     qint32 imgRows = image.rows;
     qint32 imgCols = image.cols;
-    qint32 imgDataSize = 3 * image.rows * image.cols;
+    qint32 imgBuffSize = static_cast<qint32>(compressedSize);
 
     QByteArray arrBlock;
     QDataStream stream( &arrBlock, QIODevice::WriteOnly );
-    stream << qint64(0) << qint32(MT_IMAGE) << imgType << imgRows << imgCols << imgDataSize;
-    stream.writeRawData( (char*)image.data, imgDataSize );
+    stream << qint64(0) << qint32(MT_IMAGE) << imgType << imgRows << imgCols << imgBuffSize;
+    stream.writeRawData(compressBuff.data(), imgBuffSize);
 
     if( stream.device() == nullptr ) {
         addMessageToLog("ERROR: slotSendImage() error: stream.device() == nullptr");

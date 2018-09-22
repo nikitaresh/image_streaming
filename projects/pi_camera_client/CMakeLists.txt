@@ -14,6 +14,7 @@ include_directories( ${ROOT_DIR}/include )
 include_directories( ${Qt5Core_INCLUDE_DIRS} )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 include_directories( ${ROOT_DIR}/thirdparty/raspicam-0.1.6/src )
+include_directories( ${ROOT_DIR}/thirdparty/snappy )
 
 set( HEADER sources/pi_camera.h
             sources/camera_client.h
@@ -25,7 +26,7 @@ set( SOURCES sources/main.cpp
              sources/camera_client.cpp
              )
 
-set( pi_cam_client_targets Qt5::Core Qt5::Network ${OpenCV_LIBS} )
+set( pi_cam_client_targets Qt5::Core Qt5::Network ${OpenCV_LIBS} snappy )
 if(UNIX)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -Wl,--no-as-needed")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_C_FLAGS} ")

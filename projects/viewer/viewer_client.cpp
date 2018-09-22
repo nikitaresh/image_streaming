@@ -2,7 +2,8 @@
 #include <viewer_client.h>
 #include <QByteArray>
 #include <QDataStream>
-
+#include <snappy.h>
+#include <cstring>
 
 ViewerClient::ViewerClient( QObject* parent )
     : QObject(parent), tcpSocket(this), nBitMessageSize(0)
@@ -221,9 +222,20 @@ void ViewerClient::processMessage( QDataStream& inputStream )
         qint32 imgType = 0, imgRows = 0, imgCols = 0, imgDataSize = 0;
         inputStream >> imgType >> imgRows >> imgCols >> imgDataSize;
         const qint32 RGBTypeOpenCV = 16; // cv::Mat3b has this image type value in OpenCV
-        bool isBadImgFormat = (imgType != RGBTypeOpenCV) || (imgDataSize != 3 * imgRows * imgCols);
+        bool isBadImgFormat = (imgType != RGBTypeOpenCV);
         if( isBadImgFormat ) {
             emit signalError("processMessage(...): case MT_IMAGE: bad image format");
+            return;
+        }
+
+        if( static_cast<int>(compressBuff.size()) < imgDataSize ) {
+            compressBuff.resize( imgDataSize );
+        }
+
+        inputStream.readRawData(const_cast<char*>(compressBuff.data()), imgDataSize);
+        bool isUnCompressed = snappy::Uncompress(compressBuff.data(), imgDataSize, &uncompressedBuff);
+        if( !isUnCompressed ) {
+            emit signalError("processMessage(...): case MT_IMAGE: error while uncompressing data");
             return;
         }
 
@@ -233,7 +245,12 @@ void ViewerClient::processMessage( QDataStream& inputStream )
             return;
         }
 
-        inputStream.readRawData((char*)(qImage.bits()), qImage.byteCount());
+        if( qImage.byteCount() != 3 * imgRows * imgCols ) {
+            emit signalError("processMessage(...): case MT_IMAGE: qImage.byteCount() != 3 * imgRows * imgCols");
+            return;
+        }
+
+        std::memcpy((char*)(qImage.bits()), uncompressedBuff.data(), qImage.byteCount());
         emit signalNewImage(qImage);
         break;
     }
